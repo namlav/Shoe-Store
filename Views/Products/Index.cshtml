@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebGiayyy.Models.Product>
+
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<!-- PRODUCT GRID -->
+<div class="row g-4">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card product-card">
+                <div class="product-img-wrapper">
+                    <img src="~/Images/@item.MainImage" class="product-img">
+                </div>
+                <div class="card-body text-center">
+                    <h6>@item.ProductName</h6>
+                    <p class="price">@item.Price.ToString("N0")₫</p>
+                    <a href="@Url.Action("Details","Products", new { slug = item.Slug })"
+                       class="btn btn-dark btn-sm">
+                        Xem chi tiết
+                    </a>
+                </div>
+            </div>
+        </div>
+      
+    }
+</div>

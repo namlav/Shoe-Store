@@ -1,0 +1,518 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{058BFFB1-127C-4091-AF74-85B5A57A491A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebGiayyy</RootNamespace>
+    <AssemblyName>WebGiayyy</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44399</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AppUser.cs">
+      <DependentUpon>shopgiay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cart.cs">
+      <DependentUpon>shopgiay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CartItem.cs">
+      <DependentUpon>shopgiay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>shopgiay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CategoryCreateVM.cs" />
+    <Compile Include="Models\CategoryGroup.cs">
+      <DependentUpon>shopgiay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CTGioHang.cs" />
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>shopgiay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderItem.cs">
+      <DependentUpon>shopgiay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>shopgiay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\shopgiay.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>shopgiay.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\shopgiay.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>shopgiay.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\shopgiay.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>shopgiay.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\css\bootstrap.min.css" />
+    <Content Include="Areas\Admin\css\style.css" />
+    <Content Include="Areas\Admin\js\main.js" />
+    <Content Include="Areas\Admin\lib\chart\chart.min.js" />
+    <Content Include="Areas\Admin\lib\easing\easing.js" />
+    <Content Include="Areas\Admin\lib\easing\easing.min.js" />
+    <Content Include="Areas\Admin\lib\owlcarousel\assets\ajax-loader.gif" />
+    <Content Include="Areas\Admin\lib\owlcarousel\assets\owl.carousel.css" />
+    <Content Include="Areas\Admin\lib\owlcarousel\assets\owl.carousel.min.css" />
+    <Content Include="Areas\Admin\lib\owlcarousel\assets\owl.theme.default.css" />
+    <Content Include="Areas\Admin\lib\owlcarousel\assets\owl.theme.default.min.css" />
+    <Content Include="Areas\Admin\lib\owlcarousel\assets\owl.theme.green.css" />
+    <Content Include="Areas\Admin\lib\owlcarousel\assets\owl.theme.green.min.css" />
+    <Content Include="Areas\Admin\lib\owlcarousel\assets\owl.video.play.png" />
+    <Content Include="Areas\Admin\lib\owlcarousel\owl.carousel.js" />
+    <Content Include="Areas\Admin\lib\owlcarousel\owl.carousel.min.js" />
+    <Content Include="Areas\Admin\lib\tempusdominus\css\tempusdominus-bootstrap-4.css" />
+    <Content Include="Areas\Admin\lib\tempusdominus\css\tempusdominus-bootstrap-4.min.css" />
+    <Content Include="Areas\Admin\lib\tempusdominus\js\moment-timezone.min.js" />
+    <Content Include="Areas\Admin\lib\tempusdominus\js\moment.min.js" />
+    <Content Include="Areas\Admin\lib\tempusdominus\js\tempusdominus-bootstrap-4.js" />
+    <Content Include="Areas\Admin\lib\tempusdominus\js\tempusdominus-bootstrap-4.min.js" />
+    <Content Include="Areas\Admin\lib\waypoints\waypoints.min.js" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\card-cg-1.jpg" />
+    <Content Include="Images\card-cg-10.jpg" />
+    <Content Include="Images\card-cg-2.jpg" />
+    <Content Include="Images\card-cg-3.jpg" />
+    <Content Include="Images\card-cg-4.jpg" />
+    <Content Include="Images\card-cg-5.jpg" />
+    <Content Include="Images\card-cg-6.jpg" />
+    <Content Include="Images\card-cg-7.jpg" />
+    <Content Include="Images\card-cg-8.jpg" />
+    <Content Include="Images\card-cg-9.jpg" />
+    <Content Include="Images\card-image1.jpg" />
+    <Content Include="Images\card-image10.jpg" />
+    <Content Include="Images\card-image11.jpg" />
+    <Content Include="Images\card-image12.jpg" />
+    <Content Include="Images\card-image13.jpg" />
+    <Content Include="Images\card-image14.jpg" />
+    <Content Include="Images\card-image15.jpg" />
+    <Content Include="Images\card-image16.jpg" />
+    <Content Include="Images\card-image17.jpg" />
+    <Content Include="Images\card-image18.jpg" />
+    <Content Include="Images\card-image19.jpg" />
+    <Content Include="Images\card-image2.jpg" />
+    <Content Include="Images\card-image3.jpg" />
+    <Content Include="Images\card-image4.jpg" />
+    <Content Include="Images\card-image5.jpg" />
+    <Content Include="Images\card-image6.jpg" />
+    <Content Include="Images\card-image7.jpg" />
+    <Content Include="Images\card-image8.jpg" />
+    <Content Include="Images\card-image9.jpg" />
+    <Content Include="Images\card-item1.jpg" />
+    <Content Include="Images\card-item10.jpg" />
+    <Content Include="Images\card-item11.jpg" />
+    <Content Include="Images\card-item12.jpg" />
+    <Content Include="Images\card-item13.jpg" />
+    <Content Include="Images\card-item14.jpg" />
+    <Content Include="Images\card-item15.jpg" />
+    <Content Include="Images\card-item16.jpg" />
+    <Content Include="Images\card-item17.jpg" />
+    <Content Include="Images\card-item2.jpg" />
+    <Content Include="Images\card-item3.jpg" />
+    <Content Include="Images\card-item4.jpg" />
+    <Content Include="Images\card-item5.jpg" />
+    <Content Include="Images\card-item6.jpg" />
+    <Content Include="Images\card-item7.jpg" />
+    <Content Include="Images\card-item8.jpg" />
+    <Content Include="Images\card-item9.jpg" />
+    <Content Include="Images\card-lux1.jpg" />
+    <Content Include="Images\gettyimages-51576692-612x612.jpg" />
+    <Content Include="Models\shopgiay.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>shopgiay.edmx</DependentUpon>
+      <LastGenOutput>shopgiay.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\shopgiay.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>shopgiay.edmx</DependentUpon>
+      <LastGenOutput>shopgiay.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\shopgiay.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>shopgiay.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\shopgiay.edmx.diagram">
+      <DependentUpon>shopgiay.edmx</DependentUpon>
+    </Content>
+    <Content Include="Images\card-lux10.jpg" />
+    <Content Include="Images\card-lux11.jpg" />
+    <Content Include="Images\card-lux12.jpg" />
+    <Content Include="Images\card-lux2.jpg" />
+    <Content Include="Images\card-lux3.jpg" />
+    <Content Include="Images\card-lux4.jpg" />
+    <Content Include="Images\card-lux5.jpg" />
+    <Content Include="Images\card-lux6.jpg" />
+    <Content Include="Images\card-lux7.jpg" />
+    <Content Include="Images\card-lux8.jpg" />
+    <Content Include="Images\card-lux9.jpg" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\lib\owlcarousel\LICENSE" />
+    <Content Include="Areas\Admin\lib\waypoints\links.php" />
+    <Content Include="Areas\Admin\scss\bootstrap.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\bootstrap-grid.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\bootstrap-reboot.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\bootstrap-utilities.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\bootstrap.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\forms\_floating-labels.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\forms\_form-check.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\forms\_form-control.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\forms\_form-range.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\forms\_form-select.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\forms\_form-text.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\forms\_input-group.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\forms\_labels.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\forms\_validation.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\helpers\_clearfix.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\helpers\_colored-links.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\helpers\_position.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\helpers\_ratio.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\helpers\_stretched-link.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\helpers\_text-truncation.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\helpers\_visually-hidden.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_alert.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_border-radius.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_box-shadow.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_breakpoints.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_buttons.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_caret.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_clearfix.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_color-scheme.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_container.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_deprecate.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_forms.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_gradients.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_grid.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_image.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_list-group.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_lists.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_pagination.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_reset-text.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_resize.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_table-variants.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_text-truncate.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_transition.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_utilities.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\mixins\_visually-hidden.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\utilities\_api.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\vendor\_rfs.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_accordion.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_alert.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_badge.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_breadcrumb.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_button-group.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_buttons.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_card.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_carousel.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_close.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_containers.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_dropdown.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_forms.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_functions.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_grid.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_helpers.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_images.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_list-group.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_mixins.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_modal.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_nav.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_navbar.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_offcanvas.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_pagination.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_popover.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_progress.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_reboot.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_root.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_spinners.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_tables.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_toasts.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_tooltip.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_transitions.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_type.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_utilities.scss" />
+    <Content Include="Areas\Admin\scss\bootstrap\scss\_variables.scss" />
+    <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\QuanLySanPham.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\QuanLyDanhMuc.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\QuanLyNguoiDung.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\QuanLyDonHang.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\ChiTietDonHang.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\CreateDoanhMuc.cshtml" />
+    <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.0.js" />
+    <Content Include="Scripts\jquery-3.7.0.min.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Products\Category.cshtml" />
+    <Content Include="Views\Products\_SidebarCategories.cshtml" />
+    <Content Include="Views\Products\KhachHang.cshtml" />
+    <Content Include="Views\Products\Cart.cshtml" />
+    <Content Include="Views\Products\Search.cshtml" />
+    <Content Include="Views\Products\Register.cshtml" />
+    <Content Include="Views\Products\Login.cshtml" />
+    <Content Include="Views\Products\Checkout.cshtml" />
+    <Content Include="Views\Products\Success.cshtml" />
+    <Content Include="Views\Products\OrderDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>59945</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44399/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
