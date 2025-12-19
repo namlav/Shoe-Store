@@ -1,0 +1,541 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Admin Dashboard</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <!-- DataTables -->
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fc;
+        }
+
+        /* ================== SIDEBAR ================== */
+        .admin-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+            .sidebar.collapsed {
+                width: 80px;
+            }
+
+        /* Sidebar Brand */
+        .sidebar-brand {
+            padding: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s;
+        }
+
+            .sidebar-brand .logo-icon {
+                width: 45px;
+                height: 45px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                color: white;
+                flex-shrink: 0;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            }
+
+        .sidebar.collapsed .sidebar-brand span {
+            display: none;
+        }
+
+        /* Sidebar Menu */
+        .sidebar-menu {
+            list-style: none;
+            padding: 1rem 0;
+            margin: 0;
+        }
+
+            .sidebar-menu li {
+                margin: 0.25rem 0;
+            }
+
+                .sidebar-menu li a {
+                    display: flex;
+                    align-items: center;
+                    padding: 0.9rem 1.5rem;
+                    color: rgba(255, 255, 255, 0.8);
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                    position: relative;
+                    border-left: 4px solid transparent;
+                }
+
+                    .sidebar-menu li a:hover {
+                        background-color: rgba(255, 255, 255, 0.1);
+                        color: white;
+                        border-left-color: #3498db;
+                        padding-left: 1.7rem;
+                    }
+
+                    .sidebar-menu li a.active {
+                        background-color: rgba(52, 152, 219, 0.2);
+                        color: white;
+                        border-left-color: #3498db;
+                        font-weight: 600;
+                    }
+
+                    .sidebar-menu li a i {
+                        width: 30px;
+                        font-size: 1.2rem;
+                        flex-shrink: 0;
+                        text-align: center;
+                    }
+
+                    .sidebar-menu li a span {
+                        margin-left: 0.5rem;
+                        white-space: nowrap;
+                        transition: opacity 0.3s;
+                    }
+
+        .sidebar.collapsed .sidebar-menu li a span {
+            display: none;
+        }
+
+        .sidebar.collapsed .sidebar-menu li a {
+            justify-content: center;
+            padding: 0.9rem 0;
+        }
+
+        /* Scrollbar */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+            .sidebar::-webkit-scrollbar-thumb:hover {
+                background: rgba(255, 255, 255, 0.4);
+            }
+
+        /* ================== MAIN CONTENT ================== */
+        .main-content-admin {
+            margin-left: 260px;
+            width: calc(100% - 260px);
+            transition: all 0.3s ease;
+            min-height: 100vh;
+        }
+
+        .sidebar.collapsed ~ .main-content-admin {
+            margin-left: 80px;
+            width: calc(100% - 80px);
+        }
+
+        /* Header */
+        .admin-header {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            border-bottom: 1px solid #e3e6f0;
+        }
+
+        .toggle-sidebar {
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #5a5c69;
+            transition: all 0.3s;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+        }
+
+            .toggle-sidebar:hover {
+                color: #3498db;
+                background-color: #f8f9fc;
+            }
+
+        .admin-header h4 {
+            margin: 0;
+            color: #5a5c69;
+            font-weight: 600;
+        }
+
+        /* User Info */
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: #f8f9fc;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+            .user-info:hover {
+                background-color: #e3e6f0;
+            }
+
+            .user-info i {
+                font-size: 1.5rem;
+                color: #3498db;
+            }
+
+            .user-info span {
+                font-weight: 500;
+                color: #5a5c69;
+            }
+
+        /* Stats Cards */
+        .stat-card {
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+            border: none;
+        }
+
+            .stat-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.15) !important;
+            }
+
+        .border-left-primary {
+            border-left: 4px solid #4e73df !important;
+        }
+
+        .border-left-success {
+            border-left: 4px solid #1cc88a !important;
+        }
+
+        .border-left-info {
+            border-left: 4px solid #36b9cc !important;
+        }
+
+        .border-left-warning {
+            border-left: 4px solid #f6c23e !important;
+        }
+
+        .border-left-danger {
+            border-left: 4px solid #e74a3b !important;
+        }
+
+        /* Alerts */
+        .alert {
+            border-radius: 0.5rem;
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+
+
+
+        /* Text Colors */
+        .text-gray-800 {
+            color: #5a5c69 !important;
+        }
+
+        .text-xs {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Menu Divider */
+        .menu-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 1rem 1.5rem;
+        }
+
+        .sidebar.collapsed .menu-divider {
+            margin: 1rem 0.5rem;
+        }
+
+        /* Menu Label */
+        .menu-label {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .sidebar.collapsed .menu-label {
+            display: none;
+        }
+    </style>
+
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileSidebar()"></div>
+
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="logo-icon">
+                    <i class="fas fa-shoe-prints"></i>
+                </div>
+                <span>QL Bán Giày</span>
+            </div>
+
+            <ul class="sidebar-menu">
+                <!-- Dashboard -->
+                <li>
+                    <a href="@Url.Action("Index", "Products")">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <!-- Quản lý sản phẩm -->
+                <li class="menu-label">QUẢN LÝ</li>
+                <li>
+                    <a href="@Url.Action("QuanLySanPham", "Products")">
+                        <i class="fas fa-box-open"></i>
+                        <span>Sản phẩm</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("QuanLyDanhMuc", "Products")">
+                        <i class="fas fa-th-large"></i>
+                        <span>Danh mục</span>
+                    </a>
+                </li>
+                
+
+              
+
+                <!-- Giao dịch -->
+                <li class="menu-label">GIAO DỊCH</li>
+                <li>
+                    <a href="@Url.Action("QuanLyDonHang", "Products")">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Đơn hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("QuanLyNguoiDung", "Products")">
+                        <i class="fas fa-users"></i>
+                        <span>Người dùng</span>
+                    </a>
+                </li>
+
+                <li>
+                    <div class="menu-divider"></div>
+                </li>
+
+                <!-- Báo cáo -->
+                <li class="menu-label">BÁO CÁO</li>
+                <li>
+                    <a href="@Url.Action("BaoCaoDoanhThu", "Admin")">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Doanh thu</span>
+                    </a>
+                </li>
+
+                <li>
+                    <div class="menu-divider"></div>
+                </li>
+
+                <!-- Hệ thống -->
+                <li class="menu-label">HỆ THỐNG</li>
+                <li>
+                    <a href="@Url.Action("Index", "Home")" target="_blank">
+                        <i class="fas fa-home"></i>
+                        <span>Trang chủ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Logout", "Products")">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Đăng xuất</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content-admin">
+            <!-- Header -->
+            <div class="admin-header">
+                <div class="d-flex align-items-center gap-3">
+                    <span class="toggle-sidebar" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </span>
+                    <h4 class="mb-0">@ViewBag.Title</h4>
+                </div>
+
+                <div class="d-flex align-items-center gap-3">
+                    <div class="user-info">
+                        <i class="fas fa-user-circle"></i>
+                        <span>@(Session["UserName"] ?? "Admin")</span>
+                    </div>
+                    <a href="@Url.Action("Logout", "Products")" class="btn btn-sm btn-outline-danger" title="Đăng xuất">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="d-none d-md-inline ms-1">Đăng xuất</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="container-fluid p-4">
+                <!-- Alert Messages -->
+                @if (TempData["Success"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <strong>Thành công!</strong> @TempData["Success"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        <strong>Lỗi!</strong> @TempData["Error"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+
+                @if (TempData["Warning"] != null)
+                {
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Cảnh báo!</strong> @TempData["Warning"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+
+                @if (TempData["Info"] != null)
+                {
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Thông tin!</strong> @TempData["Info"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+
+                <!-- Page Content -->
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        // Toggle sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const isMobile = window.innerWidth < 768;
+
+            if (isMobile) {
+                sidebar.classList.toggle('show');
+                document.getElementById('mobileOverlay').classList.toggle('show');
+            } else {
+                sidebar.classList.toggle('collapsed');
+                // Save state to localStorage
+                localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+            }
+        }
+
+        // Close mobile sidebar
+        function closeMobileSidebar() {
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar').classList.remove('show');
+                document.getElementById('mobileOverlay').classList.remove('show');
+            }
+        }
+
+        // Restore sidebar state
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.innerWidth >= 768) {
+                const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+                if (isCollapsed) {
+                    document.getElementById('sidebar').classList.add('collapsed');
+                }
+            }
+
+            // Active menu highlighting
+            const currentPath = window.location.pathname;
+            document.querySelectorAll('.sidebar-menu a').forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Auto hide alerts after 5 seconds
+            setTimeout(() => {
+                $('.alert').fadeOut('slow');
+            }, 5000);
+        });
+
+        // Close sidebar on mobile when clicking menu item
+        document.querySelectorAll('.sidebar-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    closeMobileSidebar();
+                }
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                document.getElementById('sidebar').classList.remove('show');
+                document.getElementById('mobileOverlay').classList.remove('show');
+            }
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

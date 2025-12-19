@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WebGiayyy.Models.Order>
+
+@{
+    ViewBag.Title = "QuanLyDonHang";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">📦 Quản lý đơn hàng</h2>
+
+<table class="table table-bordered table-hover align-middle text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>Mã đơn</th>
+            <th>Khách hàng</th>
+            <th>SĐT</th>
+            <th>Địa chỉ</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Ngày tạo</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.OrderId</td>
+                <td>@item.CustomerName</td>
+                <td>@item.Phone</td>
+                <td>@item.AddressLine</td>
+                <td class="text-danger fw-bold">
+                    @(item.TotalAmount.HasValue
+                        ? item.TotalAmount.Value.ToString("N0") + " đ"
+                        : "0 đ")
+                </td>
+                <td>
+                    <span class="badge
+                        @(item.Status == "Hoàn thành" ? "bg-success" :
+                          item.Status == "Đang giao" ? "bg-warning" :
+                          "bg-secondary")">
+                        @item.Status
+                    </span>
+                </td>
+                <td>
+                    @(item.CreatedAt.HasValue
+                        ? item.CreatedAt.Value.ToString("dd/MM/yyyy")
+                        : "")
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-info"
+                       href="@Url.Action("ChiTietDonHang", "Products", new { id = item.OrderId })">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
