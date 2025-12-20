@@ -7,7 +7,7 @@ Nhóm 11:
 
 HOW TO USE
 1. Clone repo về máy tính
-2. Khởi chạy 'LTW.sql' trong SQL Server (lưu ý tên server là '.' hoặc người clone về tự đặt)
+2. Khởi chạy 'LTW.sql' trong SQL Server (!lưu ý: trong 'Web.config' đổi tên 'data source'(tên server) thành '.' hoặc 'tên server' mà máy đang sử dụng)
 3. Khởi chạy 'WebGiayyy.sln' trong Visual Studio 2022
 4. Build solution
 5. Khởi chạy website (F5)
