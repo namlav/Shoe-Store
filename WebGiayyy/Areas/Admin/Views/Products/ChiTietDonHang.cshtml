@@ -1,0 +1,103 @@
+﻿@model IEnumerable<WebGiayyy.Models.OrderItem>
+
+@{
+    ViewBag.Title = "ChiTietDonHang";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var order = ViewBag.Order as WebGiayyy.Models.Order;
+}
+
+@using (Html.BeginForm("ChiTietDonHang", "Products", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("orderId", order.OrderId)
+    <div class="card mb-4 shadow">
+        <div class="card-header bg-dark text-white">
+            👤 Thông tin khách hàng
+        </div>
+        <div class="card-body">
+            <p><strong>Tên khách hàng:</strong> @order.CustomerName</p>
+            <p><strong>SĐT:</strong> @order.Phone</p>
+            <p><strong>Địa chỉ:</strong> @order.AddressLine</p>
+            <p><strong>User ID:</strong> @order.UserId</p>
+        </div>
+    </div>
+    <div class="card mb-4 shadow">
+        <div class="card-header bg-secondary text-white">
+            📦 Thông tin đơn hàng
+        </div>
+        <div class="card-body">
+            <p><strong>Mã đơn hàng:</strong> @order.OrderId</p>
+
+            <p>
+                <strong>Ngày đặt:</strong>
+                @(order.CreatedAt?.ToString("dd/MM/yyyy"))
+            </p>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Trạng thái đơn hàng</label>
+                @Html.DropDownList(
+                    "status",
+                    ViewBag.StatusList as SelectList,
+                    new { @class = "form-select" }
+                )
+            </div>
+        </div>
+    </div>
+    <div class="card mb-4 shadow">
+        <div class="card-header bg-info text-white">
+            🛒 Sản phẩm trong đơn hàng
+        </div>
+
+        <div class="card-body p-0">
+            <table class="table table-bordered mb-0 text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th>Mã SP</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Ảnh</th>
+                        <th>Số lượng</th>
+                        <th>Đơn giá</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ProductId</td>
+                            <td>@item.ProductName</td>
+                            <td>
+                                <img src="~/Images/@item.Product.MainImage"
+                                     width="60" />
+                            </td>
+                            <td>@item.Quantity</td>
+                            <td>
+                                @((item.UnitPrice ?? 0m).ToString("N0")) đ
+                            </td>
+                            <td>
+                                @(((item.Quantity ?? 0) * (item.UnitPrice ?? 0m)).ToString("N0")) đ
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="text-end mb-4">
+        <button type="submit" class="btn btn-success btn-lg">
+            💾 Lưu thông tin
+        </button>
+
+        <a href="@Url.Action("QuanLyDonHang", "Products")"
+           class="btn btn-secondary btn-lg ms-2">
+            ↩ Quay lại
+        </a>
+    </div>
+} <!-- ĐÓNG FORM -->
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}

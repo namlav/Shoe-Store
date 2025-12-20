@@ -1,0 +1,15 @@
+﻿@model WebGiayyy.Models.Order
+
+@{
+    ViewBag.Title = "DoanhThu";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body text-center">
+        <h5>💰 Doanh thu hôm nay</h5>
+        <h3 class="text-danger">
+            @ViewBag.DoanhThuHomNay.ToString("N0") đ
+        </h3>
+    </div>
+</div>

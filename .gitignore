@@ -485,3 +485,6 @@ $RECYCLE.BIN/
 
 # Thư mục chứa file upload của người dùng
 Uploads/
+
+# packages
+packages/

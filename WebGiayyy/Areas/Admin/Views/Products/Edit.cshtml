@@ -1,0 +1,121 @@
+﻿@model WebGiayyy.Models.Product
+
+@{
+    ViewBag.Title = "Edit Product";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chỉnh sửa sản phẩm</h2>
+
+@using (Html.BeginForm("Edit", "Products", FormMethod.Post,
+        new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ProductId)
+    @Html.HiddenFor(m => m.MainImage) <!-- giữ ảnh cũ -->
+
+    <div class="form-horizontal">
+        <hr />
+
+        <!-- Category -->
+        <div class="form-group">
+            @Html.LabelFor(m => m.CategoryId, "Danh mục", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CategoryId", null, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <!-- SKU -->
+        <div class="form-group">
+            @Html.LabelFor(m => m.SKU, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.SKU, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <!-- ProductName -->
+        <div class="form-group">
+            @Html.LabelFor(m => m.ProductName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <!-- Slug -->
+        <div class="form-group">
+            @Html.LabelFor(m => m.Slug, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Slug, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <!-- Ảnh hiện tại -->
+        <div class="form-group">
+            <label class="control-label col-md-2">Ảnh hiện tại</label>
+            <div class="col-md-10">
+                @if (!string.IsNullOrEmpty(Model.MainImage))
+                {
+                    <img src="@Url.Content(Model.MainImage)"
+                         class="img-thumbnail"
+                         style="max-height:150px" />
+                }
+                else
+                {
+                    <span class="text-muted">Chưa có ảnh</span>
+                }
+            </div>
+        </div>
+
+        <!-- Upload ảnh mới -->
+        <div class="form-group">
+            <label class="control-label col-md-2">Chọn ảnh mới</label>
+            <div class="col-md-10">
+                <input type="file" name="ImageUpload"
+                       class="form-control" accept="image/*" />
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="form-group">
+            @Html.LabelFor(m => m.Summary, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Summary, new { @class = "form-control", rows = 3 })
+            </div>
+        </div>
+
+        <!-- Price -->
+        <div class="form-group">
+            @Html.LabelFor(m => m.Price, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <!-- Stock -->
+        <div class="form-group">
+            @Html.LabelFor(m => m.Stock, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Stock, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <!-- IsActive -->
+        <div class="form-group">
+            <label class="control-label col-md-2">Kích hoạt</label>
+            <div class="col-md-10">
+                <input type="checkbox"
+                       name="IsActive"
+                       value="true"
+                       @(Model.IsActive == true ? "checked" : "") />
+            </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Lưu" class="btn btn-primary" />
+                @Html.ActionLink("Quay lại", "QuanLySanPham", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+}

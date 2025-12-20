@@ -1,0 +1,90 @@
+﻿@model IEnumerable<WebGiayyy.Models.Product>
+
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Dictionary<int, WebGiayyy.Models.CTGioHang> giohang = new Dictionary<int, WebGiayyy.Models.CTGioHang>();
+    if (Session["giohang"] != null)
+    {
+        giohang = (Dictionary<int, WebGiayyy.Models.CTGioHang>)Session["giohang"];
+    }
+
+
+}
+@{
+    decimal tongTien = 0m;
+
+    foreach (var item in Model)
+    {
+        tongTien += item.Price * giohang[item.ProductId].Quantity;
+    }
+}
+
+<div class="cat-tree">
+    <div class="card-body">
+        <h5 class="mb-3">Sản phẩm đã chọn</h5>
+        <div class="table-responsive">
+            <table class="table table-cart">
+                <thead class="cat-tree">
+                    <tr>
+                        <th></th>
+                        <th>Sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Đơn giá</th>
+                        <th>Thành tiền</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td><div class="product-img-wrapper"><img src="~/Images/@item.MainImage" class="product-img"></div></td>
+                            <td>
+                                <div class="fw-semibold">@item.ProductName</div>
+                                <div class="small text-muted">Danh mục: @item.Category.CatName</div>
+                            </td>
+                            <td>@(giohang[item.ProductId].Quantity)</td>
+                            <td>@item.Price.ToString("N0")₫</td>
+                            <td>@((item.Price*giohang[item.ProductId].Quantity).ToString("N0"))₫</td>
+
+                            <td>
+                                <a class="btn btn-danger btn-sm"
+                                   href="@Url.Action("Remove", "Products", new { cartItemId = item.ProductId })">
+                                    Xóa
+                                </a>
+                                @if (Session["LastOrderId"] != null)
+                                {
+                                    <a href="@Url.Action("OrderDetails", "Products",
+                                                        new { id = Session["LastOrderId"] })"
+                                       class="btn btn-success btn-sm">
+                                        <i class="fas fa-receipt"></i> Chi tiết đơn hàng
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="row g-3 mt-2">
+            <div class="col-12 col-md-4 ms-auto">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between">
+                            <span>Tạm tính</span>
+                            <strong class="text-danger">@tongTien.ToString("N0")₫</strong>
+                        </div>
+                        <div class="text-muted small">Phí gói: 0₫</div>
+                        <hr>
+                        <a href=@Url.Action("Checkout","Products") class="btn btn-brand w-100 btn-rounded">Tiếp tục</a>
+                        <div class="small text-muted mt-2">Đăng nhập trước khi đặt hàng.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

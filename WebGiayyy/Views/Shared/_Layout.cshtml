@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Shop Giày</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+    <!-- BOOTSTRAP 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+
+    <!-- CUSTOM CSS -->
+    <link href="~/Content/site.css" rel="stylesheet" />
+</head>
+<body>
+
+
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+        <a class="navbar-brand fw-bold" href="/">SHOE SHOP</a>
+
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Products")">Trang chủ</a></li>
+                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Products")">Sản phẩm</a></li>
+                <li class="nav-item"><a class="nav-link" href="@Url.Action("Cart","Products")">Giỏ hàng</a></li>
+
+                @if (Session["UserId"] == null)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="@Url.Action("Login","Products")">Đăng nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="@Url.Action("Register","Products")">Đăng ký</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item dropdown">
+                        <a class="btn nav-link dropdown-toggle"
+                           href="@Url.Action("KhachHang","Products")">
+                            @Session["FullName"]
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </header>
+
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <aside class="col-lg-2 col-md-3 mb-3">
+                <div class="cat-tree">
+                    @Html.Action("SidebarCategories", "Products")
+                </div>              
+                <div class="cat-tree">
+                    <div class="card-body background: #9eecff">
+                        <h6 class="mb-2">Bộ lọc</h6>
+                        <form action="@Url.Action("Search", "Products")" method="get">
+                            <div class="mb-2">
+                                <label class="form-label">Khoảng giá</label>
+                                <select class="form-select" name="khoanggia">
+                                    <option value="-">Tất cả</option>
+                                    <option value="-1000000">&lt; 1000k</option>
+                                    <option value="700000-1200000">700-1200k</option>
+                                    <option value="600000-">&gt; 600k</option>
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Tìm kiếm</label>
+                                <input type="text" class="form-control" placeholder="" name="keyword">
+                            </div>
+                            <hr>
+                            <div class="d-grid"><button type="submit" class="btn btn-brand btn-rounded btn-dark">Tìm kiếm</button></div>
+                            <div class="kit-note mt-2">Tìm kiếm với từ khóa và khoảng giá.</div>
+                        </form>
+                    </div>
+                </div>
+            </aside>
+
+
+            <main class="col-lg-10 col-md-9">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+
+    <footer class="bg-dark text-white text-center py-3 mt-4">© 2025 - Shoe Shop</footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/site.js"></script>
+    <script>
+        const select = document.getElementById('quantitySelect');
+        const input = document.getElementById('customQuantity');
+
+        select.addEventListener('change', function () {
+            if (this.value == "0") {
+                input.classList.remove('d-none');
+                input.value = 1;
+                this.value = 1; // đảm bảo Quantity luôn là số
+            } else {
+                input.classList.add('d-none');
+            }
+        });
+
+        input.addEventListener('input', function () {
+            if (this.value < 1) this.value = 1;
+            select.value = this.value; // đồng bộ về select
+        });
+    </script>
+</body>
+</html>
