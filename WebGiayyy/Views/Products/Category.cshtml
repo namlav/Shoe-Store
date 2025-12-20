@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WebGiayyy.Models.Product>
+
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row g-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="small">
+            Đang xem: <strong> @ViewBag.After </strong>
+        </div>
+        <div class="small">Sắp xếp: <strong>Phổ biến</strong></div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card product-card">
+                <div class="product-img-wrapper">
+                    <img src="~/Images/@item.MainImage" class="product-img">
+                </div>
+                <div class="card-body text-center">
+                    <h6>@item.ProductName</h6>
+                    <p class="price">@item.Price.ToString("N0")₫</p>
+                    <a href="@Url.Action("Details","Products", new { slug = item.Slug })"
+                       class="btn btn-dark btn-sm">
+                        Xem chi tiết
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

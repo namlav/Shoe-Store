@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WebGiayyy.Models.AppUser>
+
+@{
+    ViewBag.Title = "QuanLyNguoiDung";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Quản lý người dùng</h2>
+
+<table class="table table-bordered table-hover text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>Tài khoản</th>
+            <th>Email</th>
+            <th>Quyền</th>
+            <th>Trạng thái</th>
+            <th>Ngày tạo</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UserId</td>
+                <td>@item.Email</td>
+                <td>
+                    <span class="badge @(item.Role == "Admin" ? "bg-danger" : "bg-primary")">
+                        @item.Role
+                    </span>
+                </td>
+                <td>
+                    @if (item.IsActive)
+                    {
+                        <span class="badge bg-success">Hoạt động</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Bị khóa</span>
+                    }
+                </td>
+                <td>@item.CreatedAt</td>
+                <td>
+                    <a href="@Url.Action("ToggleStatus", new { id = item.UserId })"
+                       class="btn btn-sm btn-warning">
+                        @(item.IsActive ? "Khóa" : "Mở")
+                    </a>
+
+                    <a href="@Url.Action("Delete", new { id = item.UserId })"
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('Xóa người dùng này?');">
+                        Xóa
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,47 @@
+﻿@model WebGiayyy.Models.CategoryCreateVM
+@{
+    ViewBag.Title = "sửa danh mục";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("SuaDanhMuc", "Products", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="CategoryId" value="@ViewBag.CategoryId" />
+
+    <div class="mb-3">
+        <label>Tên danh mục</label>
+        @Html.TextBoxFor(m => m.CatName, new { @class = "form-control" })
+    </div>
+
+    <div class="mb-3">
+        <label>Slug</label>
+        @Html.TextBoxFor(m => m.CatSlug, new { @class = "form-control" })
+    </div>
+
+    <div class="mb-3">
+        <label>Mô tả</label>
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+    </div>
+
+    <div class="mb-3">
+        <label>Nhóm danh mục</label>
+        @Html.DropDownListFor(
+            m => m.GroupId,
+            (SelectList)ViewBag.GroupList,
+            "-- Chọn group --",
+            new { @class = "form-select" }
+        )
+    </div>
+
+    <div class="mb-3">
+        <label>Thứ tự</label>
+        @Html.TextBoxFor(m => m.SortOrder, new { @class = "form-control", type = "number" })
+    </div>
+
+    <div class="form-check mb-3">
+        @Html.CheckBoxFor(m => m.IsActive)
+        <label>Hiển thị</label>
+    </div>
+
+    <button class="btn btn-warning">💾 Cập nhật</button>
+}
